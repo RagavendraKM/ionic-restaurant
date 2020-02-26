@@ -12,6 +12,7 @@ export class HomePage {
   public lat : Number;
   public lon : Number;
   public restaurant : [];
+  public singleRestaurant : [];
   
   constructor(public navCtrl: NavController, private geolocation: Geolocation, private _loactionService: LocationServiceService) {
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -33,9 +34,12 @@ export class HomePage {
     )
   }
 
-  gotoRestaurant(id) {
-    console.log("Inside gotoRestaurant call");
-    
+   gotoRestaurant(id) {
+    console.log("Inside gotoRestaurant call", id);
+    this._loactionService.getRestaurantById(id).subscribe(
+      async res => this.singleRestaurant = await res,
+      err => err
+    )
   }
 
   async sendLocDetails(lat,lon){
@@ -43,7 +47,7 @@ export class HomePage {
     const loc = {lat : lat, lon : this.lon};
     console.log("loc", loc)
     await this._loactionService.sendLocation(loc).subscribe(
-      res => res,//this.restaurant = res,
+      res => res,
       err => err
     )
     this.getRestaurants();

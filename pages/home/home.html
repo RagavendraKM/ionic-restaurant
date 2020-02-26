@@ -11,7 +11,7 @@
 
 	<ion-row class="categories">
 		<ion-col col-6 *ngFor="let r of restaurant">
-			<ion-card>
+			<ion-card (click)=gotoRestaurant(r.restaurant.id)>
 				<ion-card-header>
 					<!-- <ion-card-subtitle src="{{r.restaurant.featured_image}}"></ion-card-subtitle> -->
           <!-- <ion-img [src]="r.restaurant.featured_image"></ion-img> -->
@@ -24,5 +24,8 @@
 			</ion-card>
 			<!-- <button ion-button color="primary" (click)=gotoRestaurant(r.restaurant.id)>{{r.restaurant.name}}</button> -->
 		</ion-col>
+    <!-- <ion-content>
+      <h2>{{singleRestaurant}}</h2>
+    </ion-content> -->
 	</ion-row>
 </ion-content>

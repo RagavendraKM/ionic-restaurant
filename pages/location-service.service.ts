@@ -20,4 +20,10 @@ export class LocationServiceService {
     return this.http.get<any>(this._restaurantUrl)
   }
 
+  getRestaurantById(id) {
+    console.log("getRestaurantsById in service file");
+    const _url = `${this._restaurantUrl}/${id}`
+    return this.http.get<any>(_url)
+  }
+
 }
