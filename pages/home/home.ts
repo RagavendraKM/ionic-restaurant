@@ -28,9 +28,14 @@ export class HomePage {
   getRestaurants() {
     console.log("getRestaurants called");
     this._loactionService.getRestaurants().subscribe(
-      res => res,
+      res => this.restaurant = res,
       err => err
     )
+  }
+
+  gotoRestaurant(id) {
+    console.log("Inside gotoRestaurant call");
+    
   }
 
   async sendLocDetails(lat,lon){
@@ -38,7 +43,7 @@ export class HomePage {
     const loc = {lat : lat, lon : this.lon};
     console.log("loc", loc)
     await this._loactionService.sendLocation(loc).subscribe(
-      res => this.restaurant = res,
+      res => res,//this.restaurant = res,
       err => err
     )
     this.getRestaurants();

@@ -1,11 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>Home</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <button ion-button color="light" (click)="sendLocDetails(lat,lng)">Detect My Location</button>
-<p>{{restaurant}}</p>
+	<h2>Nam Restaurant!</h2>
+	<button ion-button color="light" (click)="sendLocDetails(lat,lng)">Detect My Location</button>
+	<h2 text-center>{{"Restaurants"}}</h2>
+
+	<ion-row class="categories">
+		<ion-col col-6 *ngFor="let r of restaurant">
+			<ion-card>
+				<ion-card-header>
+					<!-- <ion-card-subtitle src="{{r.restaurant.featured_image}}"></ion-card-subtitle> -->
+          <!-- <ion-img [src]="r.restaurant.featured_image"></ion-img> -->
+					<!-- <ion-card-title>Card Title</ion-card-title> -->
+          <img src="{{r.restaurant.featured_image}}" />
+				</ion-card-header>
+				<ion-card-content>
+					{{r.restaurant.name}}
+				</ion-card-content>
+			</ion-card>
+			<!-- <button ion-button color="primary" (click)=gotoRestaurant(r.restaurant.id)>{{r.restaurant.name}}</button> -->
+		</ion-col>
+	</ion-row>
 </ion-content>
