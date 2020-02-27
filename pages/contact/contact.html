@@ -12,12 +12,40 @@
   <p text-center>{{singleRestaurantLocation.locality}},{{singleRestaurantLocation.city}}</p>
   <h3>MENU</h3>
   <ion-row>
-  <ion-col col-6 *ngFor="let i of menuItems">
+  <ion-col col-4 *ngFor="let i of menuItems">
 			<ion-card style="height: 100%">
 				<ion-card-header>
           <img src="{{i.imgUrl}}" style="display: inline-block;"/>
 				</ion-card-header>
 				<ion-card-content>
+           <span clear text-center *ngIf="isLiked">
+        <ion-icon name="heart" class="fav" (click)="removeFevrt(menuItems.$key)"></ion-icon>
+    </span>
+    <span clear text-center *ngIf="!isLiked">
+        <ion-icon name="heart" class="fav heart-clicked" (click)="addToFevrt(menuItems.$key)"></ion-icon>
+    </span>
+    <ion-row>
+        <ion-col col-4>
+            <div class="count">
+                <span class="item-count" (click)="removeQuantity()">
+                    -
+                </span>
+                <span class="item-count show-count">
+                    {{count}}
+                </span>
+                <span class="item-count" (click)="addQuantity()">
+                    +
+                </span>
+            </div>
+        </ion-col>
+
+        <ion-col col-6>
+            <a (click)="addToCart()" ion-button icon-left full class="btn-add-to-cart">
+                <ion-icon name="cart"></ion-icon>
+                &nbsp; {{"ADD TO CART"}}
+            </a>
+        </ion-col>
+    </ion-row>
 					<p>{{i.itemName}}</p>
           <p>₹{{i.price}}</p>
 				</ion-card-content>

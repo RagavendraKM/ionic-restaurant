@@ -11,6 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { HomeComponent } from './home/home.component';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { LocationServiceService } from '../pages/location-service.service'
+import { CartService } from '../pages/cart.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LocationServiceService } from '../pages/location-service.service'
   providers: [
     LocationServiceService,
     Geolocation,
+    CartService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
