@@ -11,4 +11,15 @@
   <p text-center>{{singleRestaurantLocation.address}}</p>
   <p text-center>{{singleRestaurantLocation.locality}},{{singleRestaurantLocation.city}}</p>
   <h3>MENU</h3>
+  <ion-col col-6 *ngFor="let i of menuItems">
+			<ion-card>
+				<ion-card-header>
+          <img src="{{i.imgUrl}}" />
+				</ion-card-header>
+				<ion-card-content>
+					<p>{{i.itemName}}</p>
+          <p>₹{{i.price}}</p>
+				</ion-card-content>
+			</ion-card>
+		</ion-col>
 </ion-content>

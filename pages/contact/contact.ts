@@ -9,9 +9,10 @@ import { LocationServiceService } from '../location-service.service';
 })
 export class ContactPage {
 
-  singleRestaurant : any = {}
-  singleRestaurantLocation : any = {}
-  id = this.navParams.get('id');
+  private singleRestaurant : any = {}
+  private singleRestaurantLocation : any = {}
+  private id = this.navParams.get('id');
+  private menuItems;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private _loactionService: LocationServiceService) {
     
@@ -24,6 +25,14 @@ export class ContactPage {
         this.singleRestaurantLocation = this.singleRestaurant.location
         return this.singleRestaurant, this.singleRestaurantLocation
         },
+      err => err
+    )
+    this.getMenu()
+  }
+
+  getMenu() {
+    this._loactionService.getMenu().subscribe(
+      res => this.menuItems = res,
       err => err
     )
   }

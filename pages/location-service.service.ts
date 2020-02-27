@@ -6,6 +6,7 @@ export class LocationServiceService {
 
   private _baseUrl = "https://maps-node--ragavendrakm.repl.co/api";
   private _restaurantUrl = `${this._baseUrl}/restaurant`;
+  private _menuUrl = `${this._baseUrl}/menu`;
 
   constructor(private http:HttpClient) { }
 
@@ -26,4 +27,7 @@ export class LocationServiceService {
     return this.http.get<any>(_url)
   }
 
+  getMenu() {
+    return this.http.get<any>(this._menuUrl);
+  }
 }
