@@ -11,10 +11,11 @@
   <p text-center>{{singleRestaurantLocation.address}}</p>
   <p text-center>{{singleRestaurantLocation.locality}},{{singleRestaurantLocation.city}}</p>
   <h3>MENU</h3>
+  <ion-row>
   <ion-col col-6 *ngFor="let i of menuItems">
-			<ion-card>
+			<ion-card style="height: 100%">
 				<ion-card-header>
-          <img src="{{i.imgUrl}}" />
+          <img src="{{i.imgUrl}}" style="display: inline-block;"/>
 				</ion-card-header>
 				<ion-card-content>
 					<p>{{i.itemName}}</p>
@@ -22,4 +23,5 @@
 				</ion-card-content>
 			</ion-card>
 		</ion-col>
+  </ion-row>
 </ion-content>
