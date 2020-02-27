@@ -32,7 +32,7 @@ export class LocationServiceService {
   }
 
   getItemDetails(id) {
-    const _url = `${this._menuUrl}/:${id}`
+    const _url = `${this._menuUrl}/${id}`
     return this.http.get<any>(_url);
   }
 }

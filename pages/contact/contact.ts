@@ -18,22 +18,6 @@ export class ContactPage {
   private singleRestaurantLocation : any = {}
   private id = this.navParams.get('id');
   private menuItems;
-  count: any = 1;
-  isLiked: boolean = false;
-  public cart = {
-    itemId: String,
-    extraOptions: [],
-    price: {
-      name: "",
-      value: 0,
-      currency: ""
-    },
-    title: "",
-    thumb: String,
-    itemQunatity: this.count
-  };
-  noOfItems: any;
-  public selectedItems: Array<any> = [];
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private _loactionService: LocationServiceService,
     public alertCtrl: AlertController,
@@ -65,33 +49,7 @@ export class ContactPage {
     this.navCtrl.push(AboutPage, {id: id});
   }
 
-  addQuantity() {
-    if (this.count < 10) {
-      this.count = this.count + 1;
-      this.cart.itemQunatity = this.count;
-    }
-  }
-
-  removeQuantity() {
-    if (this.count > 1) {
-      this.count = this.count - 1;
-      this.cart.itemQunatity = this.count;
-    }
-  }
-
-  addToCart() {
-    if (this.cart.price.name == "") {
-      let alert = this.alertCtrl.create({
-        title: "Please!",
-        subTitle: "Select Size and Price!",
-        buttons: ["OK"]
-      });
-      alert.present();
-    } else {
-      this.cartService.OnsaveLS(this.cart);
-      this.navCtrl.push("CartPage");
-    }
-  }
+  
 
   // addToFevrt(key) {
   //   if (this.af.auth.currentUser) {

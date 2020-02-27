@@ -7,13 +7,41 @@
 </ion-header>
 
 <ion-content padding>
-	<ion-card style="height: 100%" >
+	<ion-card>
 		<ion-card-header>
 			<img src="{{itemDetail.imgUrl}}" style="display: inline-block;"/>
 				</ion-card-header>
 			<ion-card-content>
 				<p>{{itemDetail.itemName}}</p>
 				<p>₹{{itemDetail.price}}</p>
+        <span clear text-center *ngIf="isLiked">
+        <ion-icon name="heart" class="fav" (click)="removeFevrt(menuItems.$key)"></ion-icon>
+    </span>
+    <span clear text-center *ngIf="!isLiked">
+        <ion-icon name="heart" class="fav heart-clicked" (click)="addToFevrt(menuItems.$key)"></ion-icon>
+    </span>
+    <ion-row>
+        <ion-col col-4>
+            <div class="count">
+                <span class="item-count" (click)="removeQuantity()">
+                    -
+                </span>
+                <span class="item-count show-count">
+                    {{count}}
+                </span>
+                <span class="item-count" (click)="addQuantity()">
+                    +
+                </span>
+            </div>
+        </ion-col>
+
+        <ion-col col-6>
+            <a (click)="addToCart()" ion-button icon-left full class="btn-add-to-cart">
+                <ion-icon name="cart"></ion-icon>
+                &nbsp; {{"ADD TO CART"}}
+            </a>
+        </ion-col>
+    </ion-row>
 			</ion-card-content>
 	</ion-card>
 </ion-content>
