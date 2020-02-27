@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { LocationServiceService } from '../location-service.service';
 import { ContactPage } from '../contact/contact';
@@ -16,13 +16,13 @@ export class HomePage {
   public restaurant : [];
   public singleRestaurant : [];
   
-  constructor(public navCtrl: NavController, private geolocation: Geolocation, private _loactionService: LocationServiceService) {
+  constructor(public navCtrl: NavController, private geolocation: Geolocation, private _loactionService: LocationServiceService, private navParams: NavParams) {
     this.geolocation.getCurrentPosition().then((resp) => {
         this.lat = resp.coords.latitude;
         this.lon = resp.coords.longitude;
         //  this.loc = {lat : this.location.lat, lon : this.location.lon} 
-        console.log("this.mapCenter.lat", this.lat)
-        console.log("this.mapCenter.lon", this.lon)
+        // console.log("this.mapCenter.lat", this.lat)
+        // console.log("this.mapCenter.lon", this.lon)
       }).catch((error) => {
           console.log('Error getting location', error);
       });
@@ -42,7 +42,7 @@ export class HomePage {
       async res => this.singleRestaurant = await res,
       err => err
     )
-    this.navCtrl.push(ContactPage);
+    this.navCtrl.push(ContactPage, {id: id});
   }
 
   async sendLocDetails(lat,lon){
