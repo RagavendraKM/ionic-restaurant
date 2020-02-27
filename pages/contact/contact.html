@@ -13,7 +13,7 @@
   <h3>MENU</h3>
   <ion-row>
   <ion-col col-4 *ngFor="let i of menuItems">
-			<ion-card style="height: 100%">
+			<ion-card style="height: 100%" (click)="getItemDetails(i._id)">
 				<ion-card-header>
           <img src="{{i.imgUrl}}" style="display: inline-block;"/>
 				</ion-card-header>

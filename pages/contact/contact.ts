@@ -5,6 +5,7 @@ import { NavController, IonicPage, NavParams,
   LoadingController } from 'ionic-angular';
 import { LocationServiceService } from '../location-service.service';
 import { CartService } from "../cart.service";
+import { AboutPage } from '../about/about';
 
 @IonicPage()
 @Component({
@@ -58,6 +59,10 @@ export class ContactPage {
       res => this.menuItems = res,
       err => err
     )
+  }
+
+  getItemDetails(id) {
+    this.navCtrl.push(AboutPage, {id: id});
   }
 
   addQuantity() {

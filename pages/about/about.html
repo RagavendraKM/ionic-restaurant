@@ -1,11 +1,19 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>
+			About
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+	<ion-card style="height: 100%" >
+		<ion-card-header>
+			<img src="{{itemDetail.imgUrl}}" style="display: inline-block;"/>
+				</ion-card-header>
+			<ion-card-content>
+				<p>{{itemDetail.itemName}}</p>
+				<p>₹{{itemDetail.price}}</p>
+			</ion-card-content>
+	</ion-card>
 </ion-content>

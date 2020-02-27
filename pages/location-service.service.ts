@@ -30,4 +30,9 @@ export class LocationServiceService {
   getMenu() {
     return this.http.get<any>(this._menuUrl);
   }
+
+  getItemDetails(id) {
+    const _url = `${this._menuUrl}/:${id}`
+    return this.http.get<any>(_url);
+  }
 }
