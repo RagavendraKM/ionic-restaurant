@@ -49,8 +49,8 @@ export class HomePage {
     console.log("lat",lat ,"lon", this.lon);
     const loc = {lat : lat, lon : this.lon};
     console.log("loc", loc)
-    await this._loactionService.sendLocation(loc).subscribe(
-      res => res,
+    this._loactionService.sendLocation(loc).subscribe(
+      async res => await res,
       err => err
     )
     this.getRestaurants();
