@@ -37,7 +37,7 @@
                                 <!-- <p class="item-name" text-wrap>{{data.item}}</p> -->
                                 <p class="item-detail" text-wrap>{{"Quantity:"}} {{data.item.itemQunatity}}</p>
                                 <p class="item-detail" text-wrap>{{"Item:"}} {{data.item.itemId}}</p>
-                                <span *ngIf="data.item.price.specialPrice">
+                                <!-- <span *ngIf="data.item.price.specialPrice">
                                     <p class="item-detail">Price: ₹{{data}}
                                         <span class="item-price">
                                             <strong class="cut"> </strong>
@@ -48,10 +48,10 @@
                                             <strong> {{currency?.currencySymbol}}{{data.item.price.specialPrice | number:'.2-2'}}</strong>
                                         </span>
                                     </p>
-                                </span>
+                                </span> -->
                                 <span *ngIf="!data.item.price.specialPrice">
                                     <p class="item-detail">{{"Price:"}}
-                                        <span class="item-price"> {{currency?.currencySymbol}}{{data.item.price.value | number:'.2-2'}}</span>
+                                        <span class="item-price">₹ {{data.itemTotalPrice}}</span>
                                     </p>
                                 </span>
 
@@ -86,7 +86,7 @@
         <ion-row class="price-details">
             <ion-col class="calculate" col-12>
                 <p class="bill-detail">{{"Price Subtotal"}}
-                    <span>{{currency?.currencySymbol}} {{subTotal | number:'.2-2'}}</span>
+                    <span>₹ {{subTotal}}</span>
                 </p>
                 <div *ngIf="deductedPrice">
                     <p class="bill-detail">{{'Deducted Price'}}

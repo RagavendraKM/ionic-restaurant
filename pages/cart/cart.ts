@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController,
-  ToastController,IonicPage,
-  LoadingController } from 'ionic-angular';
-import { LocationServiceService } from '../location-service.service';
+import { Component } from "@angular/core";
+import {
+  NavController,
+  NavParams,
+  AlertController,
+  ToastController,
+  IonicPage,
+  LoadingController
+} from "ionic-angular";
+import { LocationServiceService } from "../location-service.service";
 import { CartService } from "../cart.service";
-import { AboutPage } from '../about/about';
+import { AboutPage } from "../about/about";
 // import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
 
 @IonicPage()
@@ -13,11 +18,11 @@ import { AboutPage } from '../about/about';
   templateUrl: "cart.html"
 })
 export class CartPage {
-  private id = this.navParams.get('id');
+  private id = this.navParams.get("id");
   Cart: any[] = [];
   public settings: any = {};
   itemDetail: any = {};
-  subTotal: any;
+  subTotal = 0;
   GrandTotal: any;
   couponDiscount: any = 0;
   deductedPrice: number = 0;
@@ -36,9 +41,9 @@ export class CartPage {
     public toastCtrl: ToastController,
     public _cartService: CartService,
     public _locationService: LocationServiceService,
-    private navParams : NavParams
+    private navParams: NavParams
   ) {
-    this.currency = JSON.parse(localStorage.getItem('currency'));
+    this.currency = JSON.parse(localStorage.getItem("currency"));
     this.Cart = JSON.parse(localStorage.getItem("Cart"));
     //console.log("cart-"+JSON.stringify(this.Cart));
     if (this.Cart != null) {
@@ -53,24 +58,25 @@ export class CartPage {
     //   });
   }
 
-  //   ngOnInit() {
-  //   this._locationService.getItemDetails(this.id).subscribe(
-  //     res => this.Cart = res,
-  //     err => err
-  //   )
+
+  // applyCoupon() {
+  //   var subTotals = this.subTotal;
+  //   this.deductedPrice = Number(
+  //     (this.couponDiscount / 100 * subTotals).toFixed(2)
+  //   );
+  //   subTotals = subTotals - this.couponDiscount / 100 * subTotals;
+  //   this.GrandTotal = Number((subTotals + this.total).toFixed(2));
   // }
 
-  applyCoupon() {
-    var subTotals = this.subTotal;
-    this.deductedPrice = Number(
-      (this.couponDiscount / 100 * subTotals).toFixed(2)
-    );
-    subTotals = subTotals - this.couponDiscount / 100 * subTotals;
-    this.GrandTotal = Number((subTotals + this.total).toFixed(2));
+  calcuateTotal() {
+    var subTotals = 0
+    for (let i = 0; i < this.Cart.length - 1; i++) {
+      subTotals += this.Cart[i].itemTotalPrice;
+    }
   }
 
   deleteItem(data) {
-    console.log("data", data)
+    console.log("data", data);
     for (var i = 0; i <= this.Cart.length - 1; i++) {
       if (
         this.Cart[i].item.itemId == data.item.itemId &&
@@ -85,9 +91,11 @@ export class CartPage {
           localStorage.setItem("Cart", JSON.stringify(this.Cart));
           this.Cart = JSON.parse(localStorage.getItem("Cart"));
           this.noOfItems = this.noOfItems - 1;
+          this.calcuateTotal();
         }
       }
     }
+    
   }
 
   // callFunction() {
@@ -122,14 +130,14 @@ export class CartPage {
     //   });
     //   alert.present();
     // } else {
-      this.navCtrl.push(CartPage)
-      // this.navCtrl.push("AddressListPage", {
-      //   grandTotal: this.GrandTotal,
-      //   subTotal: this.subTotal,
-      //   couponDiscount: this.couponDiscount,
-      //   deductedPrice: this.deductedPrice,
-      //   totalVat: this.total
-      // });
+    this.navCtrl.push(CartPage);
+    // this.navCtrl.push("AddressListPage", {
+    //   grandTotal: this.GrandTotal,
+    //   subTotal: this.subTotal,
+    //   couponDiscount: this.couponDiscount,
+    //   deductedPrice: this.deductedPrice,
+    //   totalVat: this.total
+    // });
     // }
   }
 
@@ -151,15 +159,16 @@ export class CartPage {
           // if (this.Cart[i].item.price) {
           //   totalPrice =  this.Cart[i].item.price;
           // } else {
-            console.log("Updating price")
-            totalPrice = this.Cart[i].item.price;
+          console.log("Updating price");
+          totalPrice = this.Cart[i].item.price;
           // }
           this.Cart[i].itemTotalPrice = totalPrice * data.item.itemQunatity;
         }
       }
       localStorage.setItem("Cart", JSON.stringify(this.Cart));
       // this.callFunction();
-      this.applyCoupon();
+      // this.applyCoupon();
+      this.calcuateTotal();
     }
   }
 
@@ -167,28 +176,29 @@ export class CartPage {
     if (data.item.itemQunatity > 1) {
       data.item.itemQunatity = data.item.itemQunatity - 1;
       for (let i = 0; i <= this.Cart.length - 1; i++) {
-        let ExtotalPrice = 0;
+        // let ExtotalPrice = 0;
         let totalPrice = 0;
         if (
           this.Cart[i].item.itemId == data.item.itemId &&
           this.Cart[i].item.price.pname == data.item.price.pname
         ) {
           this.Cart[i].item.itemQunatity = data.item.itemQunatity;
-          for (let j = 0; j <= this.Cart[i].item.extraOptions.length - 1; j++) {
-            ExtotalPrice =
-              ExtotalPrice + this.Cart[i].item.extraOptions[j].value;
-          }
-          if (this.Cart[i].item.price.specialPrice) {
-            totalPrice = ExtotalPrice + this.Cart[i].item.price.specialPrice;
-          } else {
-            totalPrice = ExtotalPrice + this.Cart[i].item.price.value;
-          }
+          // for (let j = 0; j <= this.Cart[i].item.extraOptions.length - 1; j++) {
+          //   ExtotalPrice =
+          //     ExtotalPrice + this.Cart[i].item.extraOptions[j].value;
+          // }
+          // if (this.Cart[i].item.price.specialPrice) {
+          //   totalPrice = ExtotalPrice + this.Cart[i].item.price.specialPrice;
+          // } else {
+            totalPrice = this.Cart[i].item.price;
+          // }
           this.Cart[i].itemTotalPrice = totalPrice * data.item.itemQunatity;
         }
       }
       localStorage.setItem("Cart", JSON.stringify(this.Cart));
       // this.callFunction();
-      this.applyCoupon();
+      // this.applyCoupon();
+      this.calcuateTotal();
     }
   }
 
@@ -203,5 +213,4 @@ export class CartPage {
     localStorage.removeItem("Cart");
     this.navCtrl.push("HomePage");
   }
-
 }
