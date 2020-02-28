@@ -4,7 +4,7 @@ import { NavController, NavParams, AlertController,
   LoadingController } from 'ionic-angular';
 import { LocationServiceService } from '../location-service.service';
 import { CartService } from "../cart.service";
-import { AboutPage } from '../about/about';
+import { CartPage } from '../cart/cart';
 
 @Component({
   selector: 'page-about',
@@ -14,7 +14,15 @@ export class AboutPage {
 
   private id = this.navParams.get('id');
   private itemDetail: any = {};
-  
+  private count = 1;
+  private itemDetailInCart: any = {}
+  public cart = {
+    itemId: String,
+    price: String,
+    thumb: String,
+    itemQunatity: Number
+  };
+
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private _loactionService: LocationServiceService, public alertCtrl: AlertController, public loadingCtrl: LoadingController,public toastCtrl: ToastController, public cartService: CartService) {
 
@@ -41,18 +49,32 @@ export class AboutPage {
     }
   }
 
-  addToCart() {
-    if (this.cart.price.name == "") {
-      let alert = this.alertCtrl.create({
-        title: "Please!",
-        subTitle: "Select Size and Price!",
-        buttons: ["OK"]
-      });
-      alert.present();
-    } else {
-      this.cartService.OnsaveLS(this.cart);
-      this.navCtrl.push("CartPage");
-    }
+  addToCart(id) {
+    // if (this.cart.price.name == "") {
+    //   let alert = this.alertCtrl.create({
+    //     title: "Please!",
+    //     subTitle: "Select Size and Price!",
+    //     buttons: ["OK"]
+    //   });
+    //   alert.present();
+    // } else {
+      console.log(id);
+      this._loactionService.getItemDetails(this.id).subscribe(
+      async res => {
+        this.itemDetailInCart = await res;
+        console.log(this.itemDetailInCart,"sss");
+        this.cart.itemId = this.itemDetailInCart.itemName;
+        this.cart.itemQunatity = this.count;
+        this.cart.price = this.itemDetailInCart.price;
+        this.cart.thumb = this.itemDetailInCart.imgUrl;
+        this.cartService.OnsaveLS(this.cart);
+        this.navCtrl.push(CartPage, {id: id});
+        return this.itemDetailInCart
+        },
+      err => err
+    )
+      
+    // }
   }
 
 }

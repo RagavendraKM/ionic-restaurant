@@ -5,8 +5,21 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-navbar>
 	<h2>Nam Restaurant!</h2>
-	<button ion-button color="light" (click)="sendLocDetails(lat,lng)">Detect My Location</button>
+  <ion-buttons style="cursor:pointer"  end>
+    <button style="font-size:20px;padding:8px" (click)="sendLocDetails(lat,lng)">
+  <ion-icon name="locate"  end></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-buttons  end>
+      <button ion-button icon-only color="royal" (click)="navcart()" class="header-btn-cart">
+        <ion-icon name="cart"></ion-icon>
+        <ion-badge class="carts" item-right color="danger">{{noOfItems}}</ion-badge>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+	<!-- <button ion-button color="light" (click)="sendLocDetails(lat,lng)">Detect My Location</button> -->
 	<h2 text-center>{{"Restaurants"}}</h2>
 
 	<ion-row class="categories">

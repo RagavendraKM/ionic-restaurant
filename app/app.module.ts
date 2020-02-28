@@ -8,6 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CartPage } from '../pages/cart/cart';
 import { HomeComponent } from './home/home.component';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { LocationServiceService } from '../pages/location-service.service'
@@ -19,6 +20,7 @@ import { CartService } from '../pages/cart.service';
     AboutPage,
     ContactPage,
     HomePage,
+    CartPage,
     TabsPage,
     HomeComponent
   ],
@@ -33,6 +35,7 @@ import { CartService } from '../pages/cart.service';
     MyApp,
     AboutPage,
     ContactPage,
+    CartPage,
     HomePage,
     TabsPage
   ],
